@@ -11,6 +11,9 @@ The infrastructure for this exercise consists of the following services:
 - Spark worker B
 - Streamlit Visualization Server
 
+![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
+
+
 ### Building and Deploying
 
 Navigate to the app/resources folder:
@@ -108,6 +111,10 @@ getting the data after it was processed and aggregated.
 Finally, visit http://localhost:10501 to check the streaming dashboard.
 
 Enjoy!
+
+
+![dashboard_gif](https://github.com/user-attachments/assets/571b039d-e7a0-4742-b32e-4681c31b1d7e)
+
 
 ### Cleaning the environment
 To remove all of the services you have to be located in the infrastructure folder. Then enter the command:

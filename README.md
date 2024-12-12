@@ -1,126 +1,122 @@
-## Setting Up Infrastructure
+# Streaming ETL and Real-Time Dashboard
 
-### Overview
-The infrastructure for this exercise consists of the following services:
+This is an exercise to showcase streaming ETLs with Spark-Kafka, and real-time visualizations using Streamlit.
 
-- Zookeeper cluster
-- Kafka broker
-- Python-Kafka data producer
-- Spark master
-- Spark worker A
-- Spark worker B
-- Streamlit Visualization Server
+## Deploying the infrastructure and processes
 
-![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
+There are two ways of deploying everything. I made a bash script called `deploy.sh` and the other is manually depoying everything yourself.
 
 
-### Building and Deploying
+### Automated deployment with `deploy.sh`
 
-Navigate to the app/resources folder:
+If you are in the root of this repository, simply enter the command:
 
 ```
-cd app/
+sh deploy.sh
 ```
 
-We are going to zip the resources folder. It will be used as a python package for pyspark. Then, we will return to the root of the repository.
+It will launch everything for you. Please allow some minutes so that the Docker images are built and run. Be patient!
+Depending on your internet connection and machine, it can vary from 4 to 10 minutes the first time.
+After the Docker images are built, it takes less than one minute.
 
-```
-zip -r resources.zip resources
-cd ../../
-```
+After the services are deployed, visit the following sites:
 
-Now to actually build the services, go to the infrastructure folder:
-
-```
-cd infrastructure
-```
-
-#### Building the spark cluster image
-Here, you will find a `Dockerfile` containing the instructions to setup an Apache Spark 3.5.3 image. To build this image enter the following command in your terminal:
-
-```
-cd spark_cluster 
-docker build -t apache-spark:3.5.3 .
-```
-
-Return
-
-```
-cd ..
-```
-
-#### Building the streamlit server image
-
-```
-cd streamlit_server
-docker build --build-context streamlit_app=../../app -t streamlit-server:1.0.0 .
-```
-
-Return 
-
-```
-cd ..
-```
-#### Firing up the infrastructure
-
-You will see a Docker Compose file called `compose.yml`. This file contains the definition of the services and networking to start the infrastructure. Start the infrastructure with non-binding mode using:
-
-```
-docker compose up -d
-```
+- http://localhost:9090/ This is the Spark UI, it should have two running applications.
+- http://localhost:10501/ This is the real-time dashboard that contains the number of visits per state. hover the mouse over each state to get the count.
 
 
-### Submitting Spark Jobs
-
-To get the name of the spark container, enter the following command:
-
-```
-spark_master_container=$(docker ps --filter "name=spark-master" --format "{{.Names}}")
-```
-
-Enter this command to launch the pyspark job to receive raw messages and perform transformations:
-
-```
-docker exec -it "$spark_master_container" /bin/sh -c "
-/opt/spark/bin/spark-submit --name 'user_login_clean' \
-    --master spark://spark-master:7077 \
-    --py-files /opt/spark-apps/resources.zip \
-    --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3 \
-    --total-executor-cores 1 \
-    /opt/spark-apps/data_processing/user_login_clean.py
-"
-```
-
-Open a separate terminal and again into the spark cluster:
-
-```
-docker exec -d -it "$spark_master_container" /bin/sh -c "
-/opt/spark/bin/spark-submit --name 'user_login_stats' \
-    --master spark://spark-master:7077 \
-    --py-files /opt/spark-apps/resources.zip \
-    --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3 \
-    --total-executor-cores 1 \
-    /opt/spark-apps/data_processing/user_login_stats.py
-"
-```
-
-check in http://localhost:9090/ that spark is running the applications. You can see each job beign assigned to different workers.
-Now, allow 2 or 3 minutes to pass while Kafka server assigns partitions to the subscribers and the spark workers do their thing. This will allow the visualization server to start
-getting the data after it was processed and aggregated.
-
-Finally, visit http://localhost:10501 to check the streaming dashboard.
-
-Enjoy!
-
+Please let the consumers subscribe to topics and start processing the data. You should start seeing data in the dashboard after one to two minutes! Similar to the picture below.
 
 ![dashboard_gif](https://github.com/user-attachments/assets/571b039d-e7a0-4742-b32e-4681c31b1d7e)
 
 
-### Cleaning the environment
-To remove all of the services you have to be located in the infrastructure folder. Then enter the command:
+### Manual deployment
+
+Please refer to the following document. It has all the instructions you need.
+
+
+## Inspecting messages
+If, in addition to the dashboard, you want to see the actual messages. You can use the script `kafka_msg_display.py`.
+First, you need to install the `kafka-python` library:
 
 ```
+pip3 install kafka-python
+```
+
+Then, while in the root of the repository, enter:
+
+```
+python3 kafka_msg_display.py --topic "user-login-stats" --boostrap-server "localhost:29092"
+```
+
+Press `Ctrl + C` to exit when done.
+
+## Cleaning up
+To stop all services after you see the demo, while you are positioned at the root of the repository, just enter:
+
+```
+cd infrastructure
 docker compose down
 ```
 
-Allow a couple of seconds for Docker to clean everything.
+
+## Overview
+The infrastructure for this exercise consists of the following services:
+
+- Zookeeper Cluster
+- Kafka Broker
+- Python-Kafka data producer
+- Spark Master
+- Spark Worker A
+- Spark Worker B
+- Streamlit Visualization Server
+
+![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
+
+### Description of the workflow
+
+The workflow starts with a kafka producer service written in python. It sends user login messages to the topic `user-login`.
+Then a spark-submit job called `user_login_clean` subscribes to that topic to consume messages continously, using spark structured streaming. Some transformations are performed on the stream to clean the data:
+- Convert unix timestamp into datetime format for column `timestamp`
+- For the column `locale`, if the value in a row is null, it is transformed to `UNK`, for unknown.
+- For the column `device_type`, the string is converted to lowercase and any possible whitespace is removed to standardize the device type.
+
+The transformed data is published to another topic called `user-login-clean`. Note that the name is the same as the job to maintain consistency.
+
+A second spark-submit job called `user_login_stats` subscribes to the `user-login-clean` topic and generates sliding window aggregates for the number of users per US state in a given time window. This aggregated data is published to topic `user-login-stats`.
+
+Finally, the streamlit server users the python-kafka library to consume from `user-login-stats`. Then, it adds the visits per state and presents it in a real-time dashboard.
+
+### Description of the Services
+
+### Zookeper Cluster
+Apache Zookeper controls the cluster underneath Kafka. It manages service discovery, cluster topology, and the health of the cluster.
+This service will work in the backend, we won't be touching anything about it.
+
+### Kafka Broker
+Handles the connections from producers and consumers (clients) and manages partitions, consumer groups, and streaming offsets.
+We will be sending and receiving data from kafka in a continous flow of data.
+
+Why kafka instead of sending the data to the other services directly?
+Recall that in production we might face thousands (or even millions) of events in a very short period of time, as out application scales.
+That requires scalable infrastructure that can keep up with demand. As such, clusters of multiple computers are necessary. If we were to send data
+point-to-point, the process will become infeasible as machines are added to the cluster.
+
+Instead, Kafka can receive those messages coming from any producer of data and serve it to any consumer. Simplifying the process. In addition,
+Kafka organizes these messages into topics so that producers can direct their messages to a specific topic and consumers can listen to only the data they need.
+
+### Python-Kafka data producer
+This service is going to generate user login data and send it to kafka in a topic called `user-login`.
+
+### Spark Master
+To simulate a scalable deployment in production, we are creating a very tiny spark cluster.
+The spark master will be in charge of sending spark code to the spark workers and monitor their health.
+
+### Spark Workers A and B
+These services will be in charge of executing the spark code. In our application, the spark code subscribes
+to Kafka topics, process the data in a streaming fashion (using spark structured streaming) and delivering the results
+to another kafka topic.
+
+### Streamlit Visualization Server
+A web server built with streamlit and kafka-python. The kafka-python client wil subscribe to a topic called `user-login-stats`
+and update the counter of visits and a choropleth map of the USA with the visits per US-state.

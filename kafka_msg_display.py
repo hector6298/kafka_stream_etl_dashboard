@@ -7,13 +7,16 @@ def main():
     # Argument parser
     parser = argparse.ArgumentParser(description="Kafka Consumer Script")
     parser.add_argument("--topic", type=str, required=True, help="Kafka topic to subscribe to")
+    parser.add_argument("--bootstrap-server", type=str, required=True, help="Kafka bootstrap server")
+
     args = parser.parse_args()
     topic = args.topic
+    boostrap_server = args.bootstrap_server
 
     kafka = KafkaConsumer(
         topic,
         group_id="visualization-consumer",
-        bootstrap_servers="localhost:29092",
+        bootstrap_servers=boostrap_server,
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         auto_offset_reset='earliest',
         enable_auto_commit=False

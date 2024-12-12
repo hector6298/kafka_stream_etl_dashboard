@@ -1,0 +1,4 @@
+{
+    "bootstrap_server": "kafka:9092",
+    "topic": "user-login-stats"
+}

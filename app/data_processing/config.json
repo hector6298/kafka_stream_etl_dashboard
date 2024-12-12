@@ -1,0 +1,20 @@
+{
+  "user_login_clean": {
+    "bootstrap_server": "kafka:9092",
+    "topic_in": "user-login",
+    "topic_out": "user-login-clean",
+    "schema_location": "/opt/spark-apps/schema_definition/user_login_clean.json",
+    "checkpoint_location": "/opt/spark-data/checkpoints/user_login_clean"
+},
+  "user_login_stats": {
+      "bootstrap_server": "kafka:9092",
+      "topic_in": "user-login-clean",
+      "topic_out": "user-login-stats",
+      "schema_location": "/opt/spark-apps/schema_definition/user_login_stats.json",
+      "checkpoint_location": "/opt/spark-data/checkpoints/user_login_stats",
+
+      "window_duration": "30 seconds",
+      "slide_duration": "10 seconds",
+      "watermark_duration": "1 minute"
+  }
+}

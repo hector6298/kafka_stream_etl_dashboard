@@ -17,7 +17,7 @@ Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_et
 - :rotating_light: Git to clone the repo. Check the downloads [here](https://git-scm.com/downloads).
 - :rotating_light: Make sure to have the `zip` command available before starting. If not, get it using `sudo apt install zip`
 
-:warning: After installing these prerequisites, make sure that the commands `docker`, `zip`, and `git` are available. :warning:
+:warning: After installing these prerequisites, make sure that the commands `docker`, `zip`, and `git` are available entering them individually on the terminal. It should not `say command not found.` You should see usage help. :warning:
 
 ---
 Open a terminal, clone this code repository, and navigate to it:

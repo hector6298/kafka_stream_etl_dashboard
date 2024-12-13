@@ -10,11 +10,19 @@ Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_et
 
 ## Deploying the infrastructure and processes
 
-There are two ways of deploying everything. I made a bash script called `deploy.sh` and the other is manually deploying everything.
-
-**Important**
+**Before we start!**
 - You need Docker to be able to build and run this application. Please download the latest version [here](https://docs.docker.com/get-started/get-docker/). You need at least Dockerfile 1.4 and Buildx v0.8+ for this app, so please be sure to have Docker up-to-date.
 - You also need Python 3.10. Get it [here](https://www.python.org/downloads/release/python-3100/).
+- Git to clone the repo. Check the downloads [here](https://git-scm.com/downloads).
+
+First things first, open a terminal, clone this code repository, and navigate to it:
+
+```
+git clone https://github.com/hector6298/kafka_stream_etl_dashboard.git
+cd kafka_stream_etl_dashboard
+```
+
+There are two ways of deploying everything. I made a bash script called `deploy.sh` and the other is manually deploying everything.
 
 
 ### Automated deployment with `deploy.sh`

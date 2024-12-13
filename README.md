@@ -1,10 +1,10 @@
 # Streaming ETL and Real-Time Dashboard
 
 This is an exercise to showcase streaming ETLs with Spark-Kafka, and real-time visualizations using Streamlit.
-The application consumes user login events, process them, and display them in a real-time map to quantify logins per state.
+The application consumes user login events, processes them, and displays them in a real-time map to quantify logins per state.
 
 ## Overview of architecture
-Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_etl_dashboard/blob/main/docs/architecture_overview.md). It contains a description of the data flow, rationale of the design choices, and other considerations.
+Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_etl_dashboard/blob/main/docs/architecture_overview.md). It contains a description of the data flow, the rationale of the design choices, and other considerations.
 
 ![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
 

@@ -15,7 +15,7 @@ Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_et
 - :rotating_light: You need Docker to be able to build and run this application. Please download the latest version [here](https://docs.docker.com/get-started/get-docker/). You need at least Dockerfile 1.4 and Buildx v0.8+ for this app, so please be sure to have Docker up-to-date.
 - :rotating_light: You also need Python 3.10. Get it [here](https://www.python.org/downloads/release/python-3100/). After installation, you should have `python3` command available.
 - :rotating_light: `git` to clone the repo. Check the downloads [here](https://git-scm.com/downloads).
-- :rotating_light: Make sure to have the `zip` command available before starting. If not, get it using `sudo apt install zip`
+- :rotating_light: **(This one is especially important)** Make sure to have the `zip` command available before starting. If not, get it using `sudo apt install zip`
 - :rotating_light: `pip3` command should be installed. If not, after installing Python, get `pip` using `sudo apt install python3-pip`.
 
 :warning: After installing these prerequisites, make sure that the commands `docker`, `zip`, `python3`, `pip`, and `git` are available entering them individually on the terminal. It should not say `command not found.` You should see usage information. :warning:

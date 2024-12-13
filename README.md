@@ -1,11 +1,16 @@
 # Streaming ETL and Real-Time Dashboard
 
 This is an exercise to showcase streaming ETLs with Spark-Kafka, and real-time visualizations using Streamlit.
+The application consumes user login events, process them, and display them in a real-time map to quantify logins per state.
+
+## Overview of architecture
+Find in-depth documentation in the following page. It contains a description of the data flow, rationale of the design choices, and other considerations.
+
+![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
 
 ## Deploying the infrastructure and processes
 
-There are two ways of deploying everything. I made a bash script called `deploy.sh` and the other is manually depoying everything yourself.
-
+There are two ways of deploying everything. I made a bash script called `deploy.sh` and the other is manually depoying everything.
 
 ### Automated deployment with `deploy.sh`
 
@@ -15,7 +20,7 @@ If you are in the root of this repository, simply enter the command:
 sh deploy.sh
 ```
 
-It will launch everything for you. Please allow some minutes so that the Docker images are built and run. Be patient!
+It will launch everything for you. **Please allow some minutes so that the Docker images are built and run**. Be patient!
 Depending on your internet connection and machine, it can vary from 4 to 10 minutes the first time.
 After the Docker images are built, it takes less than one minute.
 
@@ -60,10 +65,7 @@ docker compose down
 ```
 
 
-## Overview of architecture
-Find in-depth documenation in the following page. It contains a description of the data flow, rationale of the design choices, and othre considerations.
 
-![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
 
 ## Organization of this code repository
 

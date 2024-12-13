@@ -18,6 +18,7 @@ Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_et
 - :rotating_light: Make sure to have the `zip` command available before starting. If not, get it using `sudo apt install zip`
 
 After installing these prerequisites, make sure that the commands `docker`, `zip`, and `git` are available.
+
 ---
 Open a terminal, clone this code repository, and navigate to it:
 

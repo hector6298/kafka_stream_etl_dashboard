@@ -4,13 +4,18 @@ This is an exercise to showcase streaming ETLs with Spark-Kafka, and real-time v
 The application consumes user login events, process them, and display them in a real-time map to quantify logins per state.
 
 ## Overview of architecture
-Find in-depth documentation in the following page. It contains a description of the data flow, rationale of the design choices, and other considerations.
+Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_etl_dashboard/blob/main/docs/architecture_overview.md). It contains a description of the data flow, rationale of the design choices, and other considerations.
 
 ![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
 
 ## Deploying the infrastructure and processes
 
-There are two ways of deploying everything. I made a bash script called `deploy.sh` and the other is manually depoying everything.
+There are two ways of deploying everything. I made a bash script called `deploy.sh` and the other is manually deploying everything.
+
+**Important**
+- You need Docker to be able to build and run this application. Please download the latest version [here](https://docs.docker.com/get-started/get-docker/). You need at least Dockerfile 1.4 and Buildx v0.8+ for this app, so please be sure to have Docker up-to-date.
+- You also need Python 3.10. Get it [here](https://www.python.org/downloads/release/python-3100/).
+
 
 ### Automated deployment with `deploy.sh`
 
@@ -37,12 +42,12 @@ Please let the consumers subscribe to topics and start processing the data. You 
 
 ### Manual deployment
 
-Please refer to the following document. It has all the instructions you need.
+Please refer to the [following document](https://github.com/hector6298/kafka_stream_etl_dashboard/blob/main/docs/manual_deployment.md). It has all the instructions you need.
 
 
 ## Inspecting messages
 If, in addition to the dashboard, you want to see the actual messages. You can use the script `kafka_msg_display.py`.
-First, you need to install the `kafka-python` library:
+In your terminal, install the `kafka-python` library:
 
 ```
 pip3 install kafka-python
@@ -65,15 +70,13 @@ docker compose down
 ```
 
 
-
-
 ## Organization of this code repository
 
-Navigate to this page to learn about the organization of this code repository.
+Navigate to [this page](https://github.com/hector6298/kafka_stream_etl_dashboard/blob/main/docs/code_organization.md) to learn about the organization of this code repository.
 
 ## Production considerations (Additional questions section)
 
-Navigate to this page to learn about production considerations to take this application to the next level.
+Navigate to [this page](https://github.com/hector6298/kafka_stream_etl_dashboard/blob/main/docs/additional_questions.md) to learn about production considerations to take this application to the next level.
 
 
 

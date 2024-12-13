@@ -11,6 +11,7 @@ Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_et
 ## Deploying the infrastructure and processes
 --- 
 **Before we start!**
+- Use Linux or MacOS with a bash terminal to run everything. Please avoid Windows. It might work using Windows Subsystem for Linux, but I have not tested it in that environment.
 - You need Docker to be able to build and run this application. Please download the latest version [here](https://docs.docker.com/get-started/get-docker/). You need at least Dockerfile 1.4 and Buildx v0.8+ for this app, so please be sure to have Docker up-to-date.
 - You also need Python 3.10. Get it [here](https://www.python.org/downloads/release/python-3100/).
 - Git to clone the repo. Check the downloads [here](https://git-scm.com/downloads).

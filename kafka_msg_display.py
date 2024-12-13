@@ -11,12 +11,12 @@ def main():
 
     args = parser.parse_args()
     topic = args.topic
-    boostrap_server = args.bootstrap_server
+    bootstrap_server = args.bootstrap_server
 
     kafka = KafkaConsumer(
         topic,
         group_id="visualization-consumer",
-        bootstrap_servers=boostrap_server,
+        bootstrap_servers=bootstrap_server,
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         auto_offset_reset='earliest',
         enable_auto_commit=False

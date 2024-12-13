@@ -65,3 +65,13 @@ Find in-depth documenation in the following page. It contains a description of t
 
 ![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
 
+## Organization of this code repository
+
+Navigate to this page to learn about the organization of this code repository.
+
+## Production considerations (Additional questions section)
+
+Navigate to this page to learn about production considerations to take this application to the next level.
+
+
+

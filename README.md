@@ -16,6 +16,7 @@ Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_et
 - :rotating_light: You also need Python 3.10. Get it [here](https://www.python.org/downloads/release/python-3100/).
 - :rotating_light: Git to clone the repo. Check the downloads [here](https://git-scm.com/downloads).
 - :rotating_light: Make sure to have the `zip` command available before starting. If not, get it using `sudo apt install zip`
+- :rotating_light: `pip3` command should be installed. If not, get it using `sudo apt install python3-pip`.
 
 :warning: After installing these prerequisites, make sure that the commands `docker`, `zip`, and `git` are available entering them individually on the terminal. It should not `say command not found.` You should see usage help. :warning:
 

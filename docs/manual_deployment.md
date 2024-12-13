@@ -13,7 +13,7 @@ zip -r resources.zip resources
 cd ../../
 ```
 
-Now to actually build the services, go to the infrastructure folder:
+Now, to actually build the services, go to the infrastructure folder:
 
 ```
 cd infrastructure
@@ -33,7 +33,7 @@ Return
 cd ..
 ```
 
-## Building the streamlit server image
+## Building the Streamlit server image
 
 ```
 cd streamlit_server
@@ -62,7 +62,7 @@ To get the name of the spark container, enter the following command:
 spark_master_container=$(docker ps --filter "name=spark-master" --format "{{.Names}}")
 ```
 
-Enter this command to launch the pyspark job to receive raw messages and perform transformations:
+Enter this command to launch the PySpark job to receive raw messages and perform transformations:
 
 ```
 docker exec -it "$spark_master_container" /bin/sh -c "
@@ -89,7 +89,7 @@ docker exec -d -it "$spark_master_container" /bin/sh -c "
 ```
 
 check in http://localhost:9090/ that spark is running the applications. You can see each job beign assigned to different workers.
-Now, allow 2 or 3 minutes to pass while Kafka server assigns partitions to the subscribers and the spark workers do their thing. This will allow the visualization server to start
+Now, allow 2 or 3 minutes to pass while the Kafka server assigns partitions to the subscribers and the spark workers do their thing. This will allow the visualization server to start
 getting the data after it was processed and aggregated.
 
 Finally, visit http://localhost:10501 to check the streaming dashboard.

@@ -3,9 +3,9 @@
 
 ## app/
 Contains the code of the actual application.
-- **data_processing**: This is where the streaming queries are defined in python scripts.
-- **resources**: This folder contains data connectors and other utitilities that will be used in the data_processing folder.
-- **schema_definition**: Contain json files with the definition of the structure of the dataframes. Spark will read data from kafka and will use these schemas to parse the message and convert it into DataFrame columns.
+- **data_processing**: This is where the streaming queries are defined in Python scripts.
+- **resources**: This folder contains data connectors and other utilities that will be used in the data_processing folder.
+- **schema_definition**: Contain JSON files with the definition of the structure of the dataframes. Spark will read data from kafka and will use these schemas to parse the message and convert it into DataFrame columns.
 - **visualization**: Contains the code for the visualization server app.
 
 ## docs/

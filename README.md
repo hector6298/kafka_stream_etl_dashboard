@@ -6,7 +6,7 @@ The application consumes user login events, processes them, and displays them in
 ## Overview of architecture
 Find in-depth documentation [here](https://github.com/hector6298/kafka_stream_etl_dashboard/blob/main/docs/architecture_overview.md). It contains a description of the data flow, the rationale of the design choices, and other considerations.
 
-![infra_diagram](https://github.com/user-attachments/assets/7b1237ba-bf0a-4f8e-a464-e8c9b1eac136)
+![infra_diagram2](https://github.com/user-attachments/assets/a3739461-920f-4730-b847-6c784ff223d9)
 
 ## Deploying the infrastructure and processes
 --- 

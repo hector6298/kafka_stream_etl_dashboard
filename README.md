@@ -35,7 +35,6 @@ sh deploy.sh
 
 It will launch everything for you. **Please allow some minutes so that the Docker images are built and run**. Be patient!
 Depending on your internet connection and machine, it can vary from 4 to 10 minutes the first time.
-After the Docker images are built, it takes less than one minute.
 
 After the services are deployed, visit the following sites:
 
@@ -43,7 +42,7 @@ After the services are deployed, visit the following sites:
 - http://localhost:10501/ This is the real-time dashboard that contains the number of visits per state. hover the mouse over each state to get the count.
 
 
-Please let the consumers subscribe to topics and start processing the data. You should start seeing data in the dashboard after one to two minutes! Similar to the picture below.
+Please let the consumers subscribe to topics and start processing the data. You should start seeing data in the dashboard after one to two minutes of deployment!
 
 ![dashboard_gif](https://github.com/user-attachments/assets/571b039d-e7a0-4742-b32e-4681c31b1d7e)
 
